@@ -124,7 +124,7 @@ pub struct LabelsLexerActions {}
 
 impl LabelsLexerActions {}
 
-impl LexerRecog for LabelsLexerActions {}
+impl LexerRecog<BaseLexer<Self>> for LabelsLexerActions {}
 
 impl Recognizer for LabelsLexerActions {}
 
@@ -207,4 +207,3 @@ const _serializedATN: &'static str =
 		\x2b\x29\x03\x02\x02\x02\x2b\x2c\x03\x02\x02\x02\x2c\x12\x03\x02\x02\x02\
 		\x2d\x2e\x09\x02\x02\x02\x2e\x2f\x03\x02\x02\x02\x2f\x30\x08\x0a\x02\x02\
 		\x30\x14\x03\x02\x02\x02\x05\x02\x26\x2b\x03\x08\x02\x02";
-

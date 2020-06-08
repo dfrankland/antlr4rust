@@ -141,7 +141,7 @@ pub struct XMLLexerActions {}
 
 impl XMLLexerActions {}
 
-impl LexerRecog for XMLLexerActions {}
+impl LexerRecog<BaseLexer<Self>> for XMLLexerActions {}
 
 impl Recognizer for XMLLexerActions {}
 
@@ -367,4 +367,3 @@ const _serializedATN: &'static str =
 		\x34\x03\x02\x02\x02\x14\x02\x03\x04\x3d\x53\x60\x71\x7c\u{80}\u{84}\u{87}\
 		\u{a2}\u{b9}\u{c1}\u{c5}\u{cb}\u{da}\u{dd}\x08\x08\x02\x02\x07\x03\x02\
 		\x05\x02\x02\x07\x04\x02\x03\x0c\x02\x06\x02\x02";
-

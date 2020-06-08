@@ -115,7 +115,7 @@ pub struct ReferenceToATNLexerActions {}
 
 impl ReferenceToATNLexerActions {}
 
-impl LexerRecog for ReferenceToATNLexerActions {}
+impl LexerRecog<BaseLexer<Self>> for ReferenceToATNLexerActions {}
 
 impl Recognizer for ReferenceToATNLexerActions {}
 
@@ -186,4 +186,3 @@ const _serializedATN: &'static str =
 		\x02\x02\x11\x12\x03\x02\x02\x02\x12\x06\x03\x02\x02\x02\x13\x14\x09\x02\
 		\x02\x02\x14\x15\x03\x02\x02\x02\x15\x16\x08\x04\x02\x02\x16\x08\x03\x02\
 		\x02\x02\x05\x02\x0c\x11\x03\x08\x02\x02";
-

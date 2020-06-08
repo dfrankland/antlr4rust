@@ -114,7 +114,7 @@ pub struct SimpleLRLexerActions {}
 
 impl SimpleLRLexerActions {}
 
-impl LexerRecog for SimpleLRLexerActions {}
+impl LexerRecog<BaseLexer<Self>> for SimpleLRLexerActions {}
 
 impl Recognizer for SimpleLRLexerActions {}
 
@@ -181,4 +181,3 @@ const _serializedATN: &'static str =
 		\x02\x02\x0a\x08\x03\x02\x02\x02\x0a\x0b\x03\x02\x02\x02\x0b\x04\x03\x02\
 		\x02\x02\x0c\x0d\x09\x02\x02\x02\x0d\x0e\x03\x02\x02\x02\x0e\x0f\x08\x03\
 		\x02\x02\x0f\x06\x03\x02\x02\x02\x04\x02\x0a\x03\x08\x02\x02";
-
