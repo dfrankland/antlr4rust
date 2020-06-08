@@ -5,6 +5,8 @@
 #[macro_use]
 extern crate lazy_static;
 
+mod my_base_lexer;
+
 mod gen {
     use std::fmt::Write;
     use std::io::Read;
@@ -25,6 +27,7 @@ mod gen {
     use referencetoatnlistener::ReferenceToATNListener;
     use referencetoatnparser::ReferenceToATNParser;
     use xmllexer::XMLLexer;
+    use xmlsuperclasslexer::XMLSuperClassLexer;
 
     use crate::gen::labelslexer::LabelsLexer;
     use crate::gen::labelsparser::{AddContext, EContextAll, LabelsParser};
@@ -36,6 +39,7 @@ mod gen {
     mod csvparser;
     mod csvlistener;
     mod xmllexer;
+    mod xmlsuperclasslexer;
     mod referencetoatnparser;
     mod referencetoatnlexer;
     mod referencetoatnlistener;
@@ -70,6 +74,45 @@ if (x < x && a > 0) then duh
                     string.extend(
                         format!("{},len {}:\n{}\n",
                                 xmllexer::_SYMBOLIC_NAMES[token.get_token_type() as usize].unwrap_or(&format!("{}", token.get_token_type())),
+                                len,
+                                String::from_iter(data.chars().skip(token.get_start() as usize).take(len))
+                        ).chars());
+                }
+                token_source.consume();
+            }
+        }
+        println!("{}", string);
+        println!("{}", _lexer.get_interpreter().unwrap().get_dfa().to_lexer_string());
+        Ok(())
+    }
+
+    #[test]
+    fn lexer_test_xml_super_class() -> std::io::Result<()> {
+        let data =
+            r#"<?xml version="1.0"?>
+<!--comment-->>
+<?xml-stylesheet type="text/css" href="nutrition.css"?>
+<script>
+<![CDATA[
+function f(x) {
+if (x < x && a > 0) then duh
+}
+]]>
+</script>"#.to_owned();
+        let mut _lexer = XMLSuperClassLexer::new(Box::new(InputStream::new(data.clone())));
+        //        _lexer.base.add_error_listener();
+        let _a = "a".to_owned() + "";
+        let mut string = String::new();
+        {
+            let mut token_source = UnbufferedTokenStream::new_unbuffered(&mut _lexer);
+            while token_source.la(1) != TOKEN_EOF {
+                {
+                    let token = token_source.lt(1).unwrap();
+
+                    let len = token.get_stop() as usize + 1 - token.get_start() as usize;
+                    string.extend(
+                        format!("{},len {}:\n{}\n",
+                                xmlsuperclasslexer::_SYMBOLIC_NAMES[token.get_token_type() as usize].unwrap_or(&format!("{}", token.get_token_type())),
                                 len,
                                 String::from_iter(data.chars().skip(token.get_start() as usize).take(len))
                         ).chars());
@@ -212,4 +255,6 @@ if (x < x && a > 0) then duh
             _ => panic!("oops")
         }
     }
+
+
 }
