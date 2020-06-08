@@ -57,7 +57,7 @@ pub struct LexerATNSimulator {
 
     //    merge_cache: DoubleDict,
     start_index: isize,
-    pub(crate) current_pos: Rc<LexerPosition>,
+    pub current_pos: Rc<LexerPosition>,
     mode: usize,
     prev_accept: SimState,
     lexer_action_executor: Option<Box<LexerActionExecutor>>,

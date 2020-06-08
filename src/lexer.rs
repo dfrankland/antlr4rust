@@ -89,9 +89,9 @@ impl<T: LexerRecog<Self> + 'static> DerefMut for BaseLexer<T> {
     }
 }
 
-pub(crate) struct LexerPosition {
-    pub(crate) line: Cell<isize>,
-    pub(crate) char_position_in_line: Cell<isize>,
+pub struct LexerPosition {
+    pub line: Cell<isize>,
+    pub char_position_in_line: Cell<isize>,
 }
 
 impl<T: LexerRecog<Self> + 'static> Recognizer for BaseLexer<T> {
