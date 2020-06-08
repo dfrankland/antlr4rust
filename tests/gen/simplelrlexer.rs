@@ -3,70 +3,71 @@
 #![allow(non_snake_case)]
 #![allow(non_upper_case_globals)]
 #![allow(unused_imports)]
-
-use std::cell::RefCell;
-use std::ops::{Deref, DerefMut};
-use std::rc::Rc;
-use std::sync::Arc;
-
 use antlr_rust::atn::ATN;
-use antlr_rust::atn_deserializer::ATNDeserializer;
 use antlr_rust::char_stream::CharStream;
-use antlr_rust::common_token_factory::TokenFactory;
-use antlr_rust::dfa::DFA;
-use antlr_rust::error_listener::ErrorListener;
 use antlr_rust::lexer::{BaseLexer, Lexer, LexerRecog};
-use antlr_rust::lexer_atn_simulator::{ILexerATNSimulator, LexerATNSimulator};
-use antlr_rust::parser_rule_context::{cast, LexerContext, ParserRuleContext};
+use antlr_rust::atn_deserializer::ATNDeserializer;
+use antlr_rust::dfa::DFA;
+use antlr_rust::lexer_atn_simulator::{LexerATNSimulator, ILexerATNSimulator};
 use antlr_rust::PredictionContextCache;
-use antlr_rust::recognizer::{Actions, Recognizer};
-use antlr_rust::rule_context::BaseRuleContext;
-use antlr_rust::token::*;
+use antlr_rust::recognizer::{Recognizer,Actions};
+use antlr_rust::error_listener::ErrorListener;
 use antlr_rust::token_source::TokenSource;
-use antlr_rust::vocabulary::{Vocabulary, VocabularyImpl};
+use antlr_rust::common_token_factory::TokenFactory;
+use antlr_rust::token::*;
+use antlr_rust::rule_context::BaseRuleContext;
+use antlr_rust::parser_rule_context::{ParserRuleContext,LexerContext,cast};
+use antlr_rust::vocabulary::{Vocabulary,VocabularyImpl};
 
-pub const ID: isize = 1;
-pub const WS: isize = 2;
-pub const channelNames: [&'static str; 0 + 2] = [
-    "DEFAULT_TOKEN_CHANNEL", "HIDDEN"
-];
-
-pub const modeNames: [&'static str; 1] = [
-    "DEFAULT_MODE"
-];
-
-pub const ruleNames: [&'static str; 2] = [
-    "ID", "WS"
-];
+use std::sync::Arc;
+use std::cell::RefCell;
+use std::rc::Rc;
+use std::ops::{Deref, DerefMut};
 
 
-pub const _LITERAL_NAMES: [Option<&'static str>; 0] = [];
-pub const _SYMBOLIC_NAMES: [Option<&'static str>; 3] = [
-    None, Some("ID"), Some("WS")
-];
-lazy_static! {
+		pub const ID:isize=1; 
+		pub const WS:isize=2;
+	pub const channelNames: [&'static str;0+2] = [
+		"DEFAULT_TOKEN_CHANNEL", "HIDDEN"
+	];
+
+	pub const modeNames: [&'static str;1] = [
+		"DEFAULT_MODE"
+	];
+
+	pub const ruleNames: [&'static str;2] = [
+		"ID", "WS"
+	];
+
+
+	pub const _LITERAL_NAMES: [Option<&'static str>;0] = [
+	];
+	pub const _SYMBOLIC_NAMES: [Option<&'static str>;3]  = [
+		None, Some("ID"), Some("WS")
+	];
+	lazy_static!{
 	    static ref _shared_context_cache: Arc<PredictionContextCache> = Arc::new(PredictionContextCache::new());
 		static ref VOCABULARY: Box<dyn Vocabulary> = Box::new(VocabularyImpl::new(_LITERAL_NAMES.iter(), _SYMBOLIC_NAMES.iter(), None));
 	}
 
 
 pub struct SimpleLRLexer {
-    base: BaseLexer<SimpleLRLexerActions>,
+	base: BaseLexer<SimpleLRLexerActions>,
 //	static { RuntimeMetaData.checkVersion("4.8", RuntimeMetaData.VERSION); }
 }
 
-impl Deref for SimpleLRLexer {
-    type Target = BaseLexer<SimpleLRLexerActions>;
+impl Deref for SimpleLRLexer{
+	type Target = BaseLexer<SimpleLRLexerActions>;
 
-    fn deref(&self) -> &Self::Target {
-        &self.base
-    }
+	fn deref(&self) -> &Self::Target {
+		&self.base
+	}
 }
 
-impl DerefMut for SimpleLRLexer {
-    fn deref_mut(&mut self) -> &mut Self::Target {
-        &mut self.base
-    }
+impl DerefMut for SimpleLRLexer{
+	fn deref_mut(&mut self) -> &mut Self::Target {
+		&mut self.base
+	}
 }
 
 
@@ -94,35 +95,40 @@ impl SimpleLRLexer {
         "SimpleLRLexer.g4"
     }
 
-    pub fn new(input: Box<dyn CharStream>) -> Self {
-        antlr_rust::recognizer::check_version("0", "1");
-        Self {
-            base: BaseLexer::new_base_lexer(
-                input,
-                LexerATNSimulator::new_lexer_atnsimulator(
-                    _ATN.clone(),
-                    _decision_to_DFA.clone(),
-                    _shared_context_cache.clone(),
-                ),
-                Box::new(SimpleLRLexerActions {}),
-            )
-        }
-    }
+	pub fn new (input: Box<dyn CharStream>) -> Self {
+		antlr_rust::recognizer::check_version("0","1");
+    	Self {
+			base: BaseLexer::new_base_lexer(
+				input,
+				LexerATNSimulator::new_lexer_atnsimulator(
+					_ATN.clone(),
+					_decision_to_DFA.clone(),
+					_shared_context_cache.clone(),
+				),
+				Box::new(SimpleLRLexerActions{})
+			)
+	    }
+	}
 }
 
-pub struct SimpleLRLexerActions {}
+pub struct SimpleLRLexerActions {
+}
 
-impl SimpleLRLexerActions {}
+impl SimpleLRLexerActions{
+}
 
-impl LexerRecog<BaseLexer<Self>> for SimpleLRLexerActions {}
+impl LexerRecog<BaseLexer<Self>> for SimpleLRLexerActions{
+}
 
 impl Recognizer for SimpleLRLexerActions {}
 
-impl Actions for SimpleLRLexerActions {
-    type Recog = BaseLexer<SimpleLRLexerActions>;
-}
+impl Actions for SimpleLRLexerActions{
+	type Recog = BaseLexer<SimpleLRLexerActions>;
+	}
 
-impl SimpleLRLexerActions {}
+	impl SimpleLRLexerActions{
+
+}
 
 impl TokenSource for SimpleLRLexer {
     fn next_token(&mut self) -> Box<dyn Token> {
@@ -141,9 +147,9 @@ impl TokenSource for SimpleLRLexer {
         self.base.get_input_stream()
     }
 
-    fn get_source_name(&self) -> String {
-        self.base.get_source_name()
-    }
+	fn get_source_name(&self) -> String {
+		self.base.get_source_name()
+	}
 
     fn get_token_factory(&self) -> &dyn TokenFactory {
         self.base.get_token_factory()
@@ -152,7 +158,7 @@ impl TokenSource for SimpleLRLexer {
 
 
 
-lazy_static! {
+	lazy_static! {
 	    static ref _ATN: Arc<ATN> =
 	        Arc::new(ATNDeserializer::new(None).deserialize(_serializedATN.chars()));
 	    static ref _decision_to_DFA: Arc<Vec<DFA>> = {
@@ -171,8 +177,8 @@ lazy_static! {
 
 
 
-const _serializedATN: &'static str =
-    "\x03\u{608b}\u{a72a}\u{8133}\u{b9ed}\u{417c}\u{3be7}\u{7786}\u{5964}\x02\
+	const _serializedATN:&'static str =
+		"\x03\u{608b}\u{a72a}\u{8133}\u{b9ed}\u{417c}\u{3be7}\u{7786}\u{5964}\x02\
 		\x04\x10\x08\x01\x04\x02\x09\x02\x04\x03\x09\x03\x03\x02\x06\x02\x09\x0a\
 		\x02\x0d\x02\x0e\x02\x0a\x03\x03\x03\x03\x03\x03\x03\x03\x02\x02\x04\x03\
 		\x03\x05\x04\x03\x02\x03\x04\x02\x0c\x0c\x22\x22\x02\x10\x02\x03\x03\x02\
@@ -181,3 +187,4 @@ const _serializedATN: &'static str =
 		\x02\x02\x0a\x08\x03\x02\x02\x02\x0a\x0b\x03\x02\x02\x02\x0b\x04\x03\x02\
 		\x02\x02\x0c\x0d\x09\x02\x02\x02\x0d\x0e\x03\x02\x02\x02\x0e\x0f\x08\x03\
 		\x02\x02\x0f\x06\x03\x02\x02\x02\x04\x02\x0a\x03\x08\x02\x02";
+

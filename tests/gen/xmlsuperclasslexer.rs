@@ -1,8 +1,11 @@
-// Generated from XMLLexer.g4 by ANTLR 4.8
+// Generated from XMLSuperClassLexer.g4 by ANTLR 4.8
 #![allow(dead_code)]
 #![allow(non_snake_case)]
 #![allow(non_upper_case_globals)]
 #![allow(unused_imports)]
+
+  use super::super::my_base_lexer::MyBaseLexer;
+
 use antlr_rust::atn::ATN;
 use antlr_rust::char_stream::CharStream;
 use antlr_rust::lexer::{BaseLexer, Lexer, LexerRecog};
@@ -77,27 +80,27 @@ use std::ops::{Deref, DerefMut};
 	}
 
 
-pub struct XMLLexer {
-	base: BaseLexer<XMLLexerActions>,
+pub struct XMLSuperClassLexer {
+	base: MyBaseLexer<XMLSuperClassLexerActions>,
 //	static { RuntimeMetaData.checkVersion("4.8", RuntimeMetaData.VERSION); }
 }
 
-impl Deref for XMLLexer{
-	type Target = BaseLexer<XMLLexerActions>;
+impl Deref for XMLSuperClassLexer{
+	type Target = MyBaseLexer<XMLSuperClassLexerActions>;
 
 	fn deref(&self) -> &Self::Target {
 		&self.base
 	}
 }
 
-impl DerefMut for XMLLexer{
+impl DerefMut for XMLSuperClassLexer{
 	fn deref_mut(&mut self) -> &mut Self::Target {
 		&mut self.base
 	}
 }
 
 
-impl XMLLexer {
+impl XMLSuperClassLexer {
     fn get_rule_names(&self) -> &'static [&'static str] {
         &ruleNames
     }
@@ -118,38 +121,38 @@ impl XMLLexer {
     }
 
     fn get_grammar_file_name(&self) -> &'static str {
-        "XMLLexer.g4"
+        "XMLSuperClassLexer.g4"
     }
 
 	pub fn new (input: Box<dyn CharStream>) -> Self {
 		antlr_rust::recognizer::check_version("0","1");
     	Self {
-			base: BaseLexer::new_base_lexer(
+			base: MyBaseLexer::new_base_lexer(
 				input,
 				LexerATNSimulator::new_lexer_atnsimulator(
 					_ATN.clone(),
 					_decision_to_DFA.clone(),
 					_shared_context_cache.clone(),
 				),
-				Box::new(XMLLexerActions{})
+				Box::new(XMLSuperClassLexerActions{})
 			)
 	    }
 	}
 }
 
-pub struct XMLLexerActions {
+pub struct XMLSuperClassLexerActions {
 }
 
-impl XMLLexerActions{
+impl XMLSuperClassLexerActions{
 }
 
-impl LexerRecog<BaseLexer<Self>> for XMLLexerActions{
+impl LexerRecog<MyBaseLexer<Self>> for XMLSuperClassLexerActions{
 }
 
-impl Recognizer for XMLLexerActions {}
+impl Recognizer for XMLSuperClassLexerActions {}
 
-impl Actions for XMLLexerActions{
-	type Recog = BaseLexer<XMLLexerActions>;
+impl Actions for XMLSuperClassLexerActions{
+	type Recog = MyBaseLexer<XMLSuperClassLexerActions>;
 
 		fn action(_localctx: &dyn ParserRuleContext, rule_index: isize, action_index: isize,
 		          recog:&mut <Self as Actions>::Recog
@@ -172,7 +175,7 @@ impl Actions for XMLLexerActions{
 
 	}
 
-	impl XMLLexerActions{
+	impl XMLSuperClassLexerActions{
 
 		fn CLOSE_action(_localctx: &LexerContext, action_index: isize,
 						   recog:&mut <Self as Actions>::Recog
@@ -200,7 +203,7 @@ impl Actions for XMLLexerActions{
 
 }
 
-impl TokenSource for XMLLexer {
+impl TokenSource for XMLSuperClassLexer {
     fn next_token(&mut self) -> Box<dyn Token> {
         self.base.next_token()
     }
